@@ -1,12 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common'
+import { Router } from '@angular/router';
+import { inject } from '@angular/core';
 @Component({
 selector: 'app-exercises',
 templateUrl: './app.component.html',
 styleUrl: './app.component.scss'
 })
-export class AppComponent {
+//[disabled]="!employeeForm.valid"
+export class AppComponent implements OnInit {
 title: string = '';
+private router = inject(Router);
+show: boolean = false;
 constructor(private location: Location) {
 let path = location.path();
 if (path && path.length > 1) {
@@ -18,7 +23,24 @@ else if (path === '') {
 this.setTitle('');
 }
 }
+  ngOnInit(): void {
+    if(sessionStorage.getItem("login")){
+      console.log( this.show)
+      this.show = true
+    }
+    else{
+      this.show = false
+      console.log( this.show)
+    }
+
+  }
+LogoutFunction(): void{
+  sessionStorage.setItem("login", "")
+  this.router.navigate(['/']);
+}
 setTitle(header: string) {
 this.title = header ? header : 'Home';
+
 }
+
 }

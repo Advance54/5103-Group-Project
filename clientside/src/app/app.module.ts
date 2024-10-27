@@ -13,18 +13,26 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './home/home.component';
-import { LoginpageComponent } from './loginpage/loginpage.component';
+import { LogoutpageComponent } from './loginpage/logoutpage.component';
 import { MatFormField } from '@angular/material/form-field';
 import { MatLabel } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatComponentsModule } from './mat-components/mat-components.module';
+import { EmployeeModule } from './employee/employee.module';
+import { provideHttpClient, withFetch } from '@angular/common/http';
 //mat-label
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    LoginpageComponent
+    LogoutpageComponent
   ],
   imports: [
     BrowserModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatComponentsModule,
     MatFormField,
     MatLabel,
  AppRoutingModule,
@@ -34,10 +42,13 @@ import { MatLabel } from '@angular/material/form-field';
  MatCardModule,
  MatToolbarModule,
  MatIconModule,
- MatListModule
+ MatListModule,
+ EmployeeModule
   ],
   providers: [
     provideClientHydration(),
+    provideHttpClient(withFetch()),
+
     provideAnimationsAsync()
   ],
   bootstrap: [AppComponent]

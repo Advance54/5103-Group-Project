@@ -5,7 +5,10 @@ INSERT INTO Employee (Title, firstlast, Company, Password, Email)
 VALUES ('Manager', 'Michael Tracy', 'Fanshawe', 'password', 'mt@abc.com');
 
 INSERT INTO Employee (Title,firstlast,Company,Password,Email)
- VALUES ('Manager','Marcel Ramos','FanshaweC','password','marcel@ramos.com'); 
+ VALUES ('Manager','Marcel Ramos','FanshaweC','password','marcel@ramos.com');
+
+INSERT INTO Employee (Title,firstlast,Company,Password,Email)
+ VALUES ('Manager','Alexander Mundt','Fanshawe','password','alex@mundt.com'); 
 
 --Menu items
 CREATE TABLE MenuItem (

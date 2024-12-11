@@ -11,7 +11,8 @@ import { EmployeeService } from '../employee/employee.service';
   templateUrl: './logoutpage.component.html',
   styles: ``
 })
-export class LogoutpageComponent implements OnInit {
+export class LogoutpageComponent implements OnInit
+{
   email: FormControl;
   password: FormControl;
   loginForm: FormGroup;
@@ -21,7 +22,8 @@ export class LogoutpageComponent implements OnInit {
   employees$?: Observable<Employee[]>;
   employee?: Employee;
 
-  constructor(private builder: FormBuilder, public employeeService: EmployeeService) {
+  constructor(private builder: FormBuilder, public employeeService: EmployeeService)
+  {
     this.employee = {
       id: 0,
       title: '',
@@ -40,19 +42,23 @@ export class LogoutpageComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void
+  {
     // Verifica se `sessionStorage` está disponível
-    if (typeof window !== 'undefined' && sessionStorage.getItem("login")) {
-      this.employee = JSON.parse(sessionStorage.getItem("login") || '{}')[0];
-      this.msg = `Welcome to ${this.employee?.company}'s page!`;
-      console.log(this.msg);
-    } else {
+    if (typeof window !== 'undefined' && sessionStorage.getItem("login"))
+    {
+      this.employee = JSON.parse(sessionStorage.getItem("login") || '{}');
+      this.msg = `Welcome to ${ this.employee?.firstlast }'s page!`;
+    } else
+    {
       this.router.navigate(['/']);
     }
   }
 
-  LogoutFunction(): void {
-    if (typeof window !== 'undefined') {
+  LogoutFunction(): void
+  {
+    if (typeof window !== 'undefined')
+    {
       sessionStorage.setItem("login", "");
     }
     this.router.navigate(['/']);

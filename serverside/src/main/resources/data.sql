@@ -1,9 +1,8 @@
 -- add initial employee test data
 
 
-INSERT INTO Employee (Title,firstlast,Company,Password,Email)
-<<<<<<< HEAD
- VALUES ('Manager','Michael Tracy','Fanshawe','password','mt@abc.com');
+INSERT INTO Employee (Title, firstlast, Company, Password, Email)
+VALUES ('Manager', 'Michael Tracy', 'Fanshawe', 'password', 'mt@abc.com');
 
 INSERT INTO Employee (Title,firstlast,Company,Password,Email)
  VALUES ('Manager','Marcel Ramos','FanshaweC','password','marcel@ramos.com'); 
@@ -17,6 +16,4 @@ CREATE TABLE MenuItem (
 INSERT INTO MenuItem (name, price) VALUES ('Burger', 10.99);
 INSERT INTO MenuItem (name, price) VALUES ('Pizza', 12.99);
 INSERT INTO MenuItem (name, price) VALUES ('Pasta', 8.99); 
-=======
- VALUES ('Manager','Michael Tracy','Fanshawe','password','mt@abc.com');
->>>>>>> a05599c3a481d7126339e25520bf9d17c2949b62
+

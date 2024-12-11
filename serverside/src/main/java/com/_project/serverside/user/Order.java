@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(name = "customer_order") // Renomeie a tabela
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

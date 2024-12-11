@@ -9,7 +9,8 @@ import { inject } from '@angular/core';
   templateUrl: 'login-home.component.html',
   selector: 'my-router',
 })
-export class LoginHomeComponent implements OnInit {
+export class LoginHomeComponent implements OnInit
+{
   @Input() selectedEmployee: Employee = {
     id: 0,
     title: '',
@@ -30,7 +31,8 @@ export class LoginHomeComponent implements OnInit {
   constructor(
     public employeeService: EmployeeService,
     private builder: FormBuilder
-  ) {
+  )
+  {
     this.email = new FormControl('', Validators.compose([Validators.required]));
     this.password = new FormControl('', Validators.compose([Validators.required]));
     this.loginForm = new FormGroup({
@@ -39,9 +41,11 @@ export class LoginHomeComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    if (typeof window !== 'undefined') {
-      sessionStorage.setItem('login', '');
+  ngOnInit(): void
+  {
+    if (typeof window !== 'undefined')
+    {
+      sessionStorage.setItem('login', "");
     }
 
     this.loginForm.patchValue({
@@ -53,33 +57,38 @@ export class LoginHomeComponent implements OnInit {
     });
 
     this.employeeService.getAll().subscribe({
-      next: (payload: any) => {
+      next: (payload: any) =>
+      {
         this.employees = payload;
         console.log(this.employees);
         this.msg = 'Please Note that passwords are case sensitive';
       },
-      error: (err: Error) => (this.msg = `Get failed! - ${err.message}`),
-      complete: () => {},
+      error: (err: Error) => (this.msg = `Get failed! - ${ err.message }`),
+      complete: () => { },
     });
   }
 
-  LoginFunction(): void {
+  LoginFunction(): void
+  {
     const foundEmployee = this.employees.find(
       (item) =>
         item.email.toLowerCase() === this.email.value.toLowerCase() &&
         item.password === this.password.value
     );
 
-    if (foundEmployee) {
+    if (foundEmployee)
+    {
       console.log(true);
       sessionStorage.setItem('login', JSON.stringify(foundEmployee));
       this.router.navigate(['/employees']);
-    } else {
+    } else
+    {
       this.incorrect = 1;
     }
   }
 
-  CreateFunction(): void {
+  CreateFunction(): void
+  {
     this.router.navigate(['/create']);
   }
 }

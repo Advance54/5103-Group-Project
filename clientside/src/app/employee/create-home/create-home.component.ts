@@ -56,11 +56,16 @@ export class CreateHomeComponent implements OnInit {
   password: this.password,
  })
  } // constructor
+<<<<<<< HEAD
 ngOnInit(): void {
   if (typeof window !== 'undefined') {
     sessionStorage.setItem('login', '');
   }
 
+=======
+ ngOnInit(): void {
+  sessionStorage.setItem("login", "")
+>>>>>>> a05599c3a481d7126339e25520bf9d17c2949b62
 
   this.createForm.patchValue({
     title: this.selectedEmployee.title,

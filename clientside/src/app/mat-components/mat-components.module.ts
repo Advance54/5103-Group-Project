@@ -19,6 +19,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule, MatLabel } from
 '@angular/material/form-field';
+import { ReactiveFormsModule } from '@angular/forms';
 const MaterialComponents = [MatButtonModule,
  MatCardModule,
  MatNativeDateModule,
@@ -33,6 +34,7 @@ const MaterialComponents = [MatButtonModule,
  MatListModule,
  MatMenuModule,
  MatToolbarModule,
+ ReactiveFormsModule,
  MatLabel
 ];
 @NgModule({

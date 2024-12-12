@@ -1,10 +1,13 @@
 <mat-toolbar color="primary">
   <span>INFO5103 - project</span>
   <span style="flex: 1 1 auto;"></span>
-  <!-- <button mat-button  align="center" (click)="LogoutFunction() " [disabled]="!show">Logout</button> -->
-  <button mat-button  align="end">
-  <mat-icon>menu</mat-icon>
-  </button>
+  <button mat-button  align="center" (click)="ProfileFunction() " >Profile</button>
+  <button mat-button  align="center" (click)="LogoutFunction() " >Logout</button>
+  <button mat-button  align="center" (click)="ItemFunction() " >Items</button>
+  <button mat-button  align="center" (click)="EmployeeFunction() " >Employee</button>
+
+
+
  </mat-toolbar>
 
  <router-outlet></router-outlet>

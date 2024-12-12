@@ -21,12 +21,16 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatComponentsModule } from './mat-components/mat-components.module';
 import { EmployeeModule } from './employee/employee.module';
 import { provideHttpClient, withFetch } from '@angular/common/http';
+import { ItemStockComponent } from './item/item-stock/item-stock.component';
+import { ItemChangeComponent } from './item/item-change/item-change.component';
 //mat-label
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    LogoutpageComponent
+    LogoutpageComponent,
+    ItemStockComponent,
+    ItemChangeComponent,
   ],
   imports: [
     BrowserModule,

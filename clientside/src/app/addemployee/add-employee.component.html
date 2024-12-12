@@ -1,7 +1,7 @@
 <div>
   <h2>Employee Management</h2>
 
-  <!-- Formulário para adicionar funcionário -->
+  
   <form (submit)="addEmployee()">
     <input type="text" placeholder="Title" [(ngModel)]="newEmployee.title" name="title" required />
     <input type="text" placeholder="Name" [(ngModel)]="newEmployee.firstlast" name="firstlast" required />
@@ -11,7 +11,7 @@
     <button type="submit">Add Employee</button>
   </form>
 
-  <!-- Tabela para exibir funcionários existentes -->
+  
   <table>
     <thead>
       <tr>

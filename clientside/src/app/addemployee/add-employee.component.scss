@@ -4,37 +4,37 @@ table {
   font-size: 1rem;
 
   thead {
-    background-color: #333; // Fundo mais escuro para o cabeçalho
-    color: #fff; // Letras brancas para contraste
+    background-color: #333; 
+    color: #fff; 
     text-align: left;
   }
 
   tbody {
     tr {
       &:nth-child(even) {
-        background-color: #f2f2f2; // Fundo cinza claro para linhas pares
+        background-color: #f2f2f2; 
       }
 
       &:nth-child(odd) {
-        background-color: #fff; // Fundo branco para linhas ímpares
+        background-color: #fff; 
       }
 
       &:hover {
-        background-color: #ffc107; // Destaque ao passar o mouse (amarelo claro)
-        color: #000; // Letras pretas no hover para contraste
+        background-color: #ffc107; 
+        color: #000; 
       }
     }
 
     td {
       padding: 8px;
-      border: 1px solid #ccc; // Bordas cinzas claras
-      color: #333; // Texto cinza-escuro padrão para boa legibilidade
+      border: 1px solid #ccc; 
+      color: #333; 
     }
   }
 
   th {
     padding: 10px;
     border: 1px solid #ccc;
-    color: #fff; // Letras brancas no cabeçalho
+    color: #fff; 
   }
 }

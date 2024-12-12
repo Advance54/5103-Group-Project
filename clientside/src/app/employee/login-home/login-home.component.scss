@@ -1,43 +1,63 @@
-/* Estilos para a seção de login */
+/* Login Section */
 .login-section {
-  margin: 16px;
+  margin: 20px;
+  margin-bottom: 0px;
   padding: 16px;
-  background-color: #d1cdcc; /* Fundo ajustado */
+  background-color: #989494; 
   border-radius: 8px;
+  justify-items: center;
 
   .login-fields {
     display: flex;
-    gap: 16px; /* Espaçamento entre os campos */
+    gap: 16px; 
+    margin-bottom: 20px;
 
     mat-form-field {
-      background-color: #e8e8e8; /* Fundo dos campos mais claro */
+      background-color: #807d7d; /* fields background */
       border-radius: 8px;
       padding: 8px;
+      width: 350px;
     }
   }
 
   .button-group {
-    margin-top: 16px;
+    margin-top: 10px;
+    //margin-left: 25px;
+    display: flex;
+    gap: 16px; 
+    align-self: flex-start;
+    margin-left: 0;
 
     button {
-      font-size: 1em; /* Tamanho da fonte uniforme com os botões de feedback */
+      font-size: 1em; 
       padding: 8px 16px;
+      //margin-left: 8px;
+      margin-right: 30px;
+      width: 200px; 
+      //text-align: center; 
     }
+  }
+
+  .error-message {
+    color: red; 
+    font-weight: bold; 
+    margin-top: 8px; 
+    text-align: center;
   }
 }
 
-/* Divisor entre as seções */
+/* Section Divider */
 .section-divider {
-  margin: 32px 0; /* Margem para separar as seções */
+  margin: 25px 0; /*Margin between sections */
   border-top: 1px solid #ccc;
 }
 
-/* Estilos para a seção de feedback */
+/* Feedback Section */
 .feedback-section {
   text-align: center;
   margin: 32px auto;
-  width: 50%; /* Controla a largura da seção para centralizar */
-  font-size: 1.2em; /* Aumenta o tamanho da fonte */
+  width: 50%; 
+  font-size: 1.2em; 
 
   .feedback-fields {
     display: flex;
@@ -57,7 +77,7 @@
   mat-form-field {
     display: block;
     margin-bottom: 16px;
-    background-color: #f5f5f5;
+    background-color: #959191;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     transition: box-shadow 0.3s ease;
@@ -78,24 +98,24 @@
     margin-top: 16px;
 
     button {
-      font-size: 1.1em; /* Tamanho ajustado */
+      font-size: 1.1em; 
       padding: 8px 16px;
     }
   }
 }
 
-/* Estilos para os itens do menu */
+/* Menu Items */
 mat-toolbar {
-  font-size: 1.1em; /* Aumenta levemente o tamanho da fonte */
-  background-color: #333; /* Cor de fundo */
+  font-size: 1.1em; 
+  background-color: #333; 
   color: #fff;
 
   button {
-    font-size: 1em; /* Tamanho maior para os botões */
+    font-size: 1em; 
     color: #fff;
 
     &:hover {
-      color: #007bff;
+      color: #d8e5f4;
     }
   }
 }

@@ -27,7 +27,7 @@ export class LoginHomeComponent implements OnInit {
       password: ['', [Validators.required]],
     });
 
-    // Formulário de Feedback
+    // Feedback
     this.feedbackForm = this.fb.group({
       name: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
@@ -50,7 +50,7 @@ export class LoginHomeComponent implements OnInit {
 
         if (employee) {
           sessionStorage.setItem('login', JSON.stringify(employee));
-          this.router.navigate(['/']);
+          this.router.navigate(['/employees']);
         } else {
           this.incorrect = true;
           this.msg = 'Wrong email or password. Please try again.';
@@ -76,13 +76,13 @@ sendFeedback(): void {
   if (this.feedbackForm.valid) {
     const feedback = {
       ...this.feedbackForm.value,
-      date: new Date(), // Adiciona data e hora
+      date: new Date(),
     };
 
     this.feedbackService.saveFeedback(feedback).subscribe({
       next: () => {
-        alert('Feedback sent successfully!'); // Exibe mensagem de sucesso
-        this.clearFeedback(); // Reseta os campos
+        alert('Feedback sent successfully!'); 
+        this.clearFeedback(); 
       },
       error: (err) => {
         console.error('Error sending feedback:', err);

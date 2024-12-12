@@ -1,0 +1,25 @@
+/* Estilos do mat-toolbar */
+mat-toolbar {
+  font-size: 1.4em; /* Aumenta o tamanho da fonte */
+  background-color: #000000; /* Fundo do menu */
+  color: #068282;
+
+
+
+  button {
+    font-size: 1.1em; /* Tamanho maior para os botões */
+    color: #068282;
+    padding: 8px 16px;
+    border-radius: 8px;
+
+    &:hover {
+      background-color: #f5f0f0fd; /* Cor cinza claro no hover */
+    }
+  }
+}
+
+  span {
+    font-size: 1.3em; /* Aumenta o tamanho da fonte do título */
+    font-weight: bold; /* Deixa o texto em negrito */
+    color: #068282; /* Adiciona a cor ciano para destaque */
+  }

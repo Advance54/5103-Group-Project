@@ -8,6 +8,7 @@ import { CreateHomeComponent } from './employee/create-home/create-home.componen
 import { LoginHomeComponent } from './employee/login-home/login-home.component';
 import { ItemStockComponent } from './item/item-stock/item-stock.component';
 import { EmployeeSelfEditComponent } from './employee/employee-self-edit/employee-self-edit.component';
+import { OrdersComponent } from './orders/orders.component';
 
 // Definição das rotas
 const routes: Routes = [
@@ -17,10 +18,11 @@ const routes: Routes = [
   { path: 'items', component: ItemStockComponent, title: 'Items' }, // Estoque de itens
   { path: 'create-account', component: CreateHomeComponent, title: 'Create Account' }, // Página de criação de conta
   { path: 'profile', component: EmployeeSelfEditComponent, title: 'Profile' }, // Página de perfil
+  { path: 'orders', component: OrdersComponent, title: 'Orders' },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

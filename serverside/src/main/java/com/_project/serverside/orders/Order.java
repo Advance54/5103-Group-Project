@@ -1,9 +1,13 @@
 package com._project.serverside.orders;
 
 import jakarta.persistence.*;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
-import com._project.serverside.items.Item;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name = "customer_order") // Renomeie a tabela
@@ -13,13 +17,14 @@ public class Order {
     private Long id;
 
     private String tableNumber;
-    private String dateTime;
+    private BigDecimal totalPrice;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "order_id")
-    private List<Item> items;
+    @JsonFormat(pattern = "yyyy-MM-dd@HH:mm:ss")
+    private LocalDateTime dateTime;
 
-    private double totalPrice;
+    @OneToMany(targetEntity = OrderItem.class, fetch = FetchType.EAGER, orphanRemoval = true)
+    @JoinColumn(name = "orderid", referencedColumnName = "id")
+    private List<OrderItem> items = new ArrayList<OrderItem>();
 
     // Getters e Setters
     public Long getId() {
@@ -38,27 +43,27 @@ public class Order {
         this.tableNumber = tableNumber;
     }
 
-    public String getDateTime() {
+    public LocalDateTime getDateTime() {
         return dateTime;
     }
 
-    public void setDateTime(String dateTime) {
+    public void setDateTime(LocalDateTime dateTime) {
         this.dateTime = dateTime;
     }
 
-    public List<Item> getItems() {
+    public List<OrderItem> getItems() {
         return items;
     }
 
-    public void setItems(List<Item> items) {
+    public void setItems(List<OrderItem> items) {
         this.items = items;
     }
 
-    public double getTotalPrice() {
+    public BigDecimal getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(double totalPrice) {
+    public void setTotalPrice(BigDecimal totalPrice) {
         this.totalPrice = totalPrice;
     }
 }

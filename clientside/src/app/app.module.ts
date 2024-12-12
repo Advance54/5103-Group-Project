@@ -42,7 +42,6 @@ import { ItemChangeComponent } from './item/item-change/item-change.component';
     HomeComponent,
     LogoutpageComponent,
     MenuComponent,
-    OrdersComponent,
     AddEmployeeComponent,
     ItemStockComponent,
     ItemChangeComponent
@@ -62,7 +61,8 @@ import { ItemChangeComponent } from './item/item-change/item-change.component';
     MatInputModule,
     MatFormFieldModule,
     MatComponentsModule,
-    EmployeeModule
+    EmployeeModule,
+    OrdersComponent
   ],
   providers: [
     provideClientHydration(),
@@ -71,4 +71,4 @@ import { ItemChangeComponent } from './item/item-change/item-change.component';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

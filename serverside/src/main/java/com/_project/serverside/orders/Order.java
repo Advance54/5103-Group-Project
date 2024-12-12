@@ -1,7 +1,9 @@
-package com._project.serverside.user;
+package com._project.serverside.orders;
 
 import jakarta.persistence.*;
 import java.util.List;
+
+import com._project.serverside.items.Item;
 
 @Entity
 @Table(name = "customer_order") // Renomeie a tabela
@@ -15,7 +17,7 @@ public class Order {
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "order_id")
-    private List<OrderItem> items;
+    private List<Item> items;
 
     private double totalPrice;
 
@@ -44,11 +46,11 @@ public class Order {
         this.dateTime = dateTime;
     }
 
-    public List<OrderItem> getItems() {
+    public List<Item> getItems() {
         return items;
     }
 
-    public void setItems(List<OrderItem> items) {
+    public void setItems(List<Item> items) {
         this.items = items;
     }
 

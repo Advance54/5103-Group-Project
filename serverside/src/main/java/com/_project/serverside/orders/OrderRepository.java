@@ -1,4 +1,4 @@
-package com._project.serverside.user;
+package com._project.serverside.orders;
 
 import java.util.Optional;
 
@@ -9,4 +9,3 @@ import org.springframework.stereotype.Repository;
 public interface OrderRepository extends JpaRepository<Order, Long> {
     Optional<Order> findById(Long id);
 }
-

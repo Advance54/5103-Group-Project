@@ -1,12 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-orders',
   templateUrl: './orders.component.html',
   styleUrls: ['./orders.component.scss']
 })
-export class OrdersComponent implements OnInit {
+export class OrdersComponent implements OnInit
+{
+  private router = inject(Router);
   orders: Array<{
     id: number;
     tableNumber: string;
@@ -15,14 +18,22 @@ export class OrdersComponent implements OnInit {
     totalPrice: number;
   }> = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void
+  {
+    if (!sessionStorage.getItem("login"))
+    {
+      this.router.navigate(["/"]);
+    }
+
     this.loadOrders();
   }
 
-  loadOrders(): void {
-    this.http.get('/api/orders').subscribe((data: any) => {
+  loadOrders(): void
+  {
+    this.http.get('/api/orders').subscribe((data: any) =>
+    {
       this.orders = data;
     });
   }

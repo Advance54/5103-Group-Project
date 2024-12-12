@@ -7,13 +7,16 @@ import { LoginHomeComponent } from './employee/login-home/login-home.component';
 
 import { ItemStockComponent } from './item/item-stock/item-stock.component';
 import { EmployeeSelfEditComponent } from './employee/employee-self-edit/employee-self-edit.component';
+import { OrdersComponent } from './orders/orders.component';
+
 const routes: Routes = [
- { path: 'home', component: HomeComponent, title: ' Home' },
- { path: 'employees', component: LogoutpageComponent, title: ' Employees' },
- { path: 'items', component: ItemStockComponent, title: ' Items' },
- { path: 'create', component: CreateHomeComponent, title: 'create' },
- { path: 'profile', component: EmployeeSelfEditComponent, title: 'profile' },
- { path: '', component: LoginHomeComponent, title: 'login' }
+  { path: 'home', component: HomeComponent, title: ' Home' },
+  { path: 'employees', component: LogoutpageComponent, title: ' Employees' },
+  { path: 'items', component: ItemStockComponent, title: ' Items' },
+  { path: 'create', component: CreateHomeComponent, title: 'create' },
+  { path: 'profile', component: EmployeeSelfEditComponent, title: 'profile' },
+  { path: 'orders', component: OrdersComponent, title: 'orders' },
+  { path: '', component: LoginHomeComponent, title: 'login' }
 
 ];
 

@@ -22,5 +22,8 @@ public class OrderItem {
     private Integer itemid; // FK
 
     private int qty;
+
+    private String name;
+    private String description;
     private BigDecimal item_cost;
 }

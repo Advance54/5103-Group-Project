@@ -13,7 +13,7 @@ import jakarta.persistence.Id;
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long Id;
+    private long id;
     private String title;
     private String firstlast;
     private String company;
@@ -22,11 +22,11 @@ public class Employee {
 
         // Getters and Setters
     public Long getId() {
-        return Id;
+        return id;
     }
 
     public void setId(Long id) {
-        this.Id = id;
+        this.id = id;
     }
 
     public String getTitle() {

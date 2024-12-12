@@ -6,90 +6,58 @@ import { inject } from '@angular/core';
 @Component({
   selector: 'app-exercises',
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit
-{
+export class AppComponent implements OnInit {
   title: string = '';
   private router = inject(Router);
   show: boolean = false;
 
-  constructor(private location: Location)
-  {
+  constructor(private location: Location) {
     const path = location.path();
-    if (path && path.length > 1)
-    {
+    if (path && path.length > 1) {
       let header = path.substring(1, 2).toUpperCase();
       header += path.substring(2);
       this.setTitle(header);
-    } else if (path === '')
-    {
+    } else if (path === '') {
       this.setTitle('');
     }
   }
 
-  ngOnInit(): void
-  {
-    if (typeof window !== 'undefined' && sessionStorage.getItem("login"))
-    {
-      console.log(this.show);
+  ngOnInit(): void {
+    if (typeof window !== 'undefined' && sessionStorage.getItem("login")) {
       this.show = true;
-    } else
-    {
+    } else {
       this.show = false;
-      console.log(this.show);
     }
   }
 
-  isLoggedIn(): boolean
-  {
-    if (sessionStorage.getItem("login") == "")
-    {
-      return false;
-    }
-
-    return true;
+  isLoggedIn(): boolean {
+    return sessionStorage.getItem("login") !== "";
   }
 
-  //trying to currently research how to fix this AGAIN, no idea why it's throwing errors but working
-  //I cannot solve this, it works so I'll leave it
-LogoutFunction(): void{
-  sessionStorage.setItem("login", "")
-  this.router.navigate(['/']);
-}
-ItemFunction(): void{
-
-  this.router.navigate(['/items']);
-}
-EmployeeFunction(): void{
-
-  this.router.navigate(['/employees']);
-}
-ProfileFunction(): void{
-console.log("testing")
-  this.router.navigate(['/profile']);
-}
-setTitle(header: string) {
-this.title = header ? header : 'Home';
-
-
-  LogoutFunction(): void
-  {
-    if (typeof window !== 'undefined')
-    {
-      sessionStorage.setItem("login", "");
-      this.router.navigate(['/']);
-    }
+  LogoutFunction(): void {
+    sessionStorage.setItem("login", "");
+    this.router.navigate(['/']);
   }
 
-  setTitle(header: string)
-  {
+  ItemFunction(): void {
+    this.router.navigate(['/items']);
+  }
+
+  EmployeeFunction(): void {
+    this.router.navigate(['/employees']);
+  }
+
+  ProfileFunction(): void {
+    this.router.navigate(['/profile']);
+  }
+
+  setTitle(header: string): void {
     this.title = header ? header : 'Home';
   }
 
-  // Navegar entre rotas
-  navigateTo(route: string): void
-  {
-    this.router.navigate([`/${ route }`]);
+  navigateTo(route: string): void {
+    this.router.navigate([`/${route}`]);
   }
 }

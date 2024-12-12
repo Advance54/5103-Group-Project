@@ -16,21 +16,8 @@ public class EmployeeController {
     @GetMapping
     public ResponseEntity<Iterable<Employee>> findAll() {
         try {
-            Iterable<Employee> employees = employeeRepository.findAll();
-            return ResponseEntity.ok(employees);
+            return ResponseEntity.ok(employeeRepository.findAll());
         } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-        }
-    }
-
-    @PutMapping
-    public ResponseEntity<Employee> updateOne(@RequestBody Employee employee) {
-        try {
-            Employee updatedEmployee = employeeRepository.save(employee);
-            return ResponseEntity.ok(updatedEmployee);
-        } catch (Exception e) {
-            e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
@@ -38,19 +25,27 @@ public class EmployeeController {
     @PostMapping
     public ResponseEntity<Employee> addOne(@RequestBody Employee employee) {
         try {
-            Employee newEmployee = employeeRepository.save(employee);
-            return ResponseEntity.status(HttpStatus.CREATED).body(newEmployee);
+            return ResponseEntity.status(HttpStatus.CREATED).body(employeeRepository.save(employee));
         } catch (Exception e) {
-            e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Integer> deleteOne(@PathVariable Long id) {
+    public ResponseEntity<String> deleteOne(@PathVariable Long id) {
         try {
-            int rowsDeleted = employeeRepository.deleteOne(id);
-            return ResponseEntity.ok(rowsDeleted);
+            employeeRepository.deleteById(id);
+            return ResponseEntity.ok("Employee deleted successfully");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error deleting employee");
+        }
+    }
+
+        @PutMapping
+    public ResponseEntity<Employee> updateOne(@RequestBody Employee employee) {
+        try {
+            Employee updatedEmployee = employeeRepository.save(employee);
+            return ResponseEntity.ok(updatedEmployee);
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);

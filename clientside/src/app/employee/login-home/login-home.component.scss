@@ -1,0 +1,101 @@
+/* Estilos para a seção de login */
+.login-section {
+  margin: 16px;
+  padding: 16px;
+  background-color: #d1cdcc; /* Fundo ajustado */
+  border-radius: 8px;
+
+  .login-fields {
+    display: flex;
+    gap: 16px; /* Espaçamento entre os campos */
+
+    mat-form-field {
+      background-color: #e8e8e8; /* Fundo dos campos mais claro */
+      border-radius: 8px;
+      padding: 8px;
+    }
+  }
+
+  .button-group {
+    margin-top: 16px;
+
+    button {
+      font-size: 1em; /* Tamanho da fonte uniforme com os botões de feedback */
+      padding: 8px 16px;
+    }
+  }
+}
+
+/* Divisor entre as seções */
+.section-divider {
+  margin: 32px 0; /* Margem para separar as seções */
+  border-top: 1px solid #ccc;
+}
+
+/* Estilos para a seção de feedback */
+.feedback-section {
+  text-align: center;
+  margin: 32px auto;
+  width: 50%; /* Controla a largura da seção para centralizar */
+  font-size: 1.2em; /* Aumenta o tamanho da fonte */
+
+  .feedback-fields {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+
+    .half-width {
+      flex: 1 1 45%;
+    }
+  }
+
+  .full-width {
+    width: 100%;
+    margin: 16px 0;
+  }
+
+  mat-form-field {
+    display: block;
+    margin-bottom: 16px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.3s ease;
+
+    &:hover {
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+  }
+
+  textarea {
+    min-height: 100px;
+  }
+
+  .button-group {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 16px;
+
+    button {
+      font-size: 1.1em; /* Tamanho ajustado */
+      padding: 8px 16px;
+    }
+  }
+}
+
+/* Estilos para os itens do menu */
+mat-toolbar {
+  font-size: 1.1em; /* Aumenta levemente o tamanho da fonte */
+  background-color: #333; /* Cor de fundo */
+  color: #fff;
+
+  button {
+    font-size: 1em; /* Tamanho maior para os botões */
+    color: #fff;
+
+    &:hover {
+      color: #007bff;
+    }
+  }
+}

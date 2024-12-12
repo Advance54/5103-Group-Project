@@ -1,94 +1,99 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Employee } from '../employee';
-import { EmployeeService } from '../employee.service';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { inject } from '@angular/core';
+import { EmployeeService } from '../employee.service';
+import { FeedbackService } from '../../feedback/feedback.service'; // Caminho corrigido
 
 @Component({
-  templateUrl: 'login-home.component.html',
-  selector: 'my-router',
+  selector: 'app-login-home',
+  templateUrl: './login-home.component.html',
+  styleUrls: ['./login-home.component.scss'],
 })
-export class LoginHomeComponent implements OnInit
-{
-  @Input() selectedEmployee: Employee = {
-    id: 0,
-    title: '',
-    firstlast: '',
-    company: '',
-    email: '',
-    password: '',
-  };
-
-  employees: Array<Employee> = [];
-  msg: string = '';
+export class LoginHomeComponent implements OnInit {
   loginForm: FormGroup;
-  private router = inject(Router);
-  email: FormControl;
-  password: FormControl;
-  incorrect: number = 0;
+  feedbackForm: FormGroup;
+  incorrect: boolean = false;
+  msg: string = '';
 
   constructor(
-    public employeeService: EmployeeService,
-    private builder: FormBuilder
-  )
-  {
-    this.email = new FormControl('', Validators.compose([Validators.required]));
-    this.password = new FormControl('', Validators.compose([Validators.required]));
-    this.loginForm = new FormGroup({
-      email: this.email,
-      password: this.password,
+    private fb: FormBuilder,
+    private router: Router,
+    private employeeService: EmployeeService,
+    private feedbackService: FeedbackService
+  ) {
+    // Formulário de Login
+    this.loginForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]],
+    });
+
+    // Formulário de Feedback
+    this.feedbackForm = this.fb.group({
+      name: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+      message: ['', [Validators.required]],
     });
   }
 
-  ngOnInit(): void
-  {
-    if (typeof window !== 'undefined')
-    {
-      sessionStorage.setItem('login', "");
-    }
+  ngOnInit(): void { }
 
-    this.loginForm.patchValue({
-      title: this.selectedEmployee.title,
-      firstname: this.selectedEmployee.firstlast,
-      lastname: this.selectedEmployee.password,
-      phoneno: this.selectedEmployee.company,
-      email: this.selectedEmployee.email,
-    });
+  LoginFunction(): void {
+  if (this.loginForm.valid) {
+    const { email, password } = this.loginForm.value;
 
-    this.employeeService.getAll().subscribe({
-      next: (payload: any) =>
-      {
-        this.employees = payload;
-        console.log(this.employees);
-        this.msg = 'Please Note that passwords are case sensitive';
+    this.employeeService.getEmployees().subscribe({
+      next: (employees: any[]) => {
+        const employee = employees.find(
+          (emp: { email: string; password: string }) =>
+            emp.email === email && emp.password === password
+        );
+
+        if (employee) {
+          sessionStorage.setItem('login', JSON.stringify(employee));
+          this.router.navigate(['/']);
+        } else {
+          this.incorrect = true;
+          this.msg = 'Wrong email or password. Please try again.';
+        }
       },
-      error: (err: Error) => (this.msg = `Get failed! - ${ err.message }`),
-      complete: () => { },
+      error: (err) => {
+        console.error('Error fetching employees:', err);
+        alert('Login failed. Please try again later.');
+      },
+    });
+  } else {
+    this.msg = 'Please fill in all required fields.';
+    this.incorrect = true;
+  }
+}
+
+
+  CreateFunction(): void {
+    this.router.navigate(['/create-account']);
+  }
+
+sendFeedback(): void {
+  if (this.feedbackForm.valid) {
+    const feedback = {
+      ...this.feedbackForm.value,
+      date: new Date(), // Adiciona data e hora
+    };
+
+    this.feedbackService.saveFeedback(feedback).subscribe({
+      next: () => {
+        alert('Feedback sent successfully!'); // Exibe mensagem de sucesso
+        this.clearFeedback(); // Reseta os campos
+      },
+      error: (err) => {
+        console.error('Error sending feedback:', err);
+        alert('Failed to send feedback. Please try again.');
+      },
     });
   }
+}
 
-  LoginFunction(): void
-  {
-    const foundEmployee = this.employees.find(
-      (item) =>
-        item.email.toLowerCase() === this.email.value.toLowerCase() &&
-        item.password === this.password.value
-    );
 
-    if (foundEmployee)
-    {
-      console.log(true);
-      sessionStorage.setItem('login', JSON.stringify(foundEmployee));
-      this.router.navigate(['/employees']);
-    } else
-    {
-      this.incorrect = 1;
-    }
-  }
-
-  CreateFunction(): void
-  {
-    this.router.navigate(['/create']);
+  clearFeedback(): void {
+    this.feedbackForm.reset();
   }
 }

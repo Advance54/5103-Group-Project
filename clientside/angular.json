@@ -75,12 +75,6 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
-<<<<<<< HEAD
-          "options": {
-            "proxyConfig": "proxy.config.json"
-          },
-=======
->>>>>>> a05599c3a481d7126339e25520bf9d17c2949b62
           "configurations": {
             "production": {
               "buildTarget": "clientside:build:production"
@@ -118,13 +112,8 @@
         }
       }
     }
-<<<<<<< HEAD
   },
   "cli": {
     "analytics": false
   }
 }
-=======
-  }
-}
->>>>>>> a05599c3a481d7126339e25520bf9d17c2949b62

@@ -16,7 +16,8 @@ import { EmployeeService } from '../employee/employee.service';
   styles: ``
 })
 
-export class LogoutpageComponent implements OnInit{
+export class LogoutpageComponent implements OnInit
+{
   Form: FormGroup;
   title: FormControl;
   firstlast: FormControl;
@@ -36,7 +37,8 @@ export class LogoutpageComponent implements OnInit{
   employees$?: Observable<Employee[]>;
   employee?: Employee;
 
-  constructor(private builder: FormBuilder, public employeeService: EmployeeService) {
+  constructor(private builder: FormBuilder, public employeeService: EmployeeService)
+  {
     this.employees = [];
     this.createEmployee = false;
 
@@ -48,75 +50,74 @@ export class LogoutpageComponent implements OnInit{
       password: '',
       email: '',
 
-      };
-      this.employee_new = {
-        id: 0,
-        title: '',
-        firstlast: '',
-        company: '',
-        password: '',
-        email: '',
-        };
-      this.employee_d = {
-        id: 0,
-        title: '',
-        firstlast: '',
-        company: '',
-        password: '',
-        email: '',
-        };
-      this.msg = '';
-
-  this.email = new FormControl('', Validators.compose([Validators.required]));
-  this.password = new FormControl('', Validators.compose([Validators.required]));
-  this.title = new FormControl('', Validators.compose([Validators.required]));
-  this.firstlast = new FormControl('', Validators.compose([Validators.required]));
-  this.Form = new FormGroup({
-    password: this.password,
-    email: this.email,
-    title: this.password,
-    firstlast: this.email,
-  });
-
+    };
+    this.employee_new = {
+      id: 0,
+      title: '',
+      firstlast: '',
+      company: '',
+      password: '',
+      email: '',
+    };
+    this.employee_d = {
+      id: 0,
+      title: '',
+      firstlast: '',
+      company: '',
+      password: '',
+      email: '',
+    };
+    this.msg = '';
 
     this.email = new FormControl('', Validators.compose([Validators.required]));
     this.password = new FormControl('', Validators.compose([Validators.required]));
-    this.loginForm = new FormGroup({
+    this.title = new FormControl('', Validators.compose([Validators.required]));
+    this.firstlast = new FormControl('', Validators.compose([Validators.required]));
+    this.Form = new FormGroup({
       password: this.password,
       email: this.email,
+      title: this.password,
+      firstlast: this.email,
     });
+
+    // HUH !?!??!
+    // this.email = new FormControl('', Validators.compose([Validators.required]));
+    // this.password = new FormControl('', Validators.compose([Validators.required]));
+    // this.loginForm = new FormGroup({
+    //   password: this.password,
+    //   email: this.email,
+    // });
   }
 
-
-
-
-
-  } // constructor
-  ngOnInit(): void {
+  ngOnInit(): void
+  {
     console.log(sessionStorage.getItem("login"))
 
     //this.msg = `${} `
-    if(sessionStorage.getItem("login")){
+    if (sessionStorage.getItem("login"))
+    {
       // console.log(sessionStorage.getItem("login"))
-      this.employee = JSON.parse(sessionStorage.getItem("login")|| '{}')[0]
+      this.employee = JSON.parse(sessionStorage.getItem("login") || '{}')[0]
       console.log(this.employee)
-      this.msg = `Welcome to ${this.employee?.company}'s page!`
+      this.msg = `Welcome to ${ this.employee?.company }'s page!`
       //console.log(this.msg)
     }
-    else{
+    else
+    {
       this.router.navigate(['/']);
     }
 
     this.employeeService.getAll().subscribe({
       // Observer object, complete method intrinscally unsubscribes
-      next: (payload: any) => {
-      this.employees = payload;
-     //console.log(this.employees)
+      next: (payload: any) =>
+      {
+        this.employees = payload;
+        //console.log(this.employees)
 
       },
-      error: (err: Error) => (this.msg = `Get failed! - ${err.message}`),
-      complete: () => {},
-      }); // subscribe
+      error: (err: Error) => (this.msg = `Get failed! - ${ err.message }`),
+      complete: () => { },
+    }); // subscribe
 
 
 
@@ -131,14 +132,16 @@ export class LogoutpageComponent implements OnInit{
     this.router.navigate(['/']);
   }
 
-  startNewEmployee(): void {
+  startNewEmployee(): void
+  {
     this.employee_new = Object.assign({}, this.employee_d);
     this.msg = 'New Employee';
     this.createEmployee = !this.createEmployee
-    }
-  GetEmployeesList():Employee[]{
+  }
+  GetEmployeesList(): Employee[]
+  {
     //console.log(this.employees.filter(loggedin =>  loggedin.firstlast !== this.employee?.firstlast))
-    return this.employees.filter(loggedin =>  loggedin.firstlast !== this.employee?.firstlast);
+    return this.employees.filter(loggedin => loggedin.firstlast !== this.employee?.firstlast);
 
   }
   // ngOnInit(): void {
@@ -155,8 +158,10 @@ export class LogoutpageComponent implements OnInit{
   //     });
   //     this.employees$.forEach((element) => console.log(element.at(0)));
   //     } // getAll
-  updateNewEmployeeForm(): void {
-    if(this.employee_new && this.employee){
+  updateNewEmployeeForm(): void
+  {
+    if (this.employee_new && this.employee)
+    {
       this.employee_new.title = this.Form.getRawValue().title;
       this.employee_new.firstlast = this.Form.getRawValue().firstlast;
       this.employee_new.company = this.employee.company
@@ -166,35 +171,39 @@ export class LogoutpageComponent implements OnInit{
       // location.reload();
     }
 
-    setTimeout(() => {
+    setTimeout(() =>
+    {
       window.location.reload();
-  }, 50);
+    }, 50);
 
 
-  //window.location.reload();
+    //window.location.reload();
   }
-  add(emp: Employee): void {
+  add(emp: Employee): void
+  {
 
-  this.employeeService.create(emp).subscribe({
-  // Create observer object
-  next: (emp: Employee) => {
-  this.msg = `Employee ${emp.firstlast} added!`;
-  this.getAllEmps();
-  this.createEmployee = !this.createEmployee
-  },
-  error: (err: Error) =>
-  (this.msg = `Employee not added! - ${err.message}`),
-
-  });
-  //window.location.reload();
-  } // add
-  getAllEmps(): void {
-    this.employeeService.getAll().subscribe({
-    next: (emps: Employee[]) => {this.dataSource.data = emps},
-    error: (e: Error) => this.msg = `Failed to load Employees - ${e.message}`,
+    this.employeeService.create(emp).subscribe({
+      // Create observer object
+      next: (emp: Employee) =>
+      {
+        this.msg = `Employee ${ emp.firstlast } added!`;
+        this.getAllEmps();
+        this.createEmployee = !this.createEmployee
+      },
+      error: (err: Error) =>
+        (this.msg = `Employee not added! - ${ err.message }`),
 
     });
-    }
+    //window.location.reload();
+  } // add
+  getAllEmps(): void
+  {
+    this.employeeService.getAll().subscribe({
+      next: (emps: Employee[]) => { this.dataSource.data = emps },
+      error: (e: Error) => this.msg = `Failed to load Employees - ${ e.message }`,
+
+    });
+  }
 
 
 }

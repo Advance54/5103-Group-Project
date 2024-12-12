@@ -13,19 +13,21 @@
       </tr>
     </thead>
     <tbody>
-<tr *ngFor="let order of orders">
-  <td>{{ order.id }}</td>
-  <td>{{ order.tableNumber }}</td>
-  <td>{{ order.dateTime }}</td>
-  <td>
-    <ul>
-      <li *ngFor="let item of order.items">
-        {{ item.name }} (x{{ item.quantity }}) - {{ item.unitPrice | currency: 'CAD' }}
-      </li>
-    </ul>
-  </td>
-  <td>{{ order.totalPrice | currency: 'CAD' }}</td>
-</tr>
+      <tr *ngFor="let order of orders">
+        <td>{{ order.id }}</td>
+        <td>{{ order.tableNumber }}</td>
+        <td>{{ order.dateTime }}</td>
+        <td>
+          <ul>
+            <li *ngFor="let item of order.items">
+              <!-- {{ item.name }} (x{{ item.quantity }}) - {{ item.unitPrice | currency: 'CAD' }} -->
+              {{ item.name }} (x{{ item.quantity }}) - {{ item.unitPrice }}
+            </li>
+          </ul>
+        </td>
+        <!-- <td>{{ order.totalPrice | currency: 'CAD' }}</td> -->
+        <td>{{ order.totalPrice }}</td>
+      </tr>
 
     </tbody>
   </table>

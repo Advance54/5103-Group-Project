@@ -6,46 +6,56 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss']
 })
-export class MenuComponent implements OnInit {
+export class MenuComponent implements OnInit
+{
   menuItems: Array<{ name: string; price: number }> = [];
   newItem = { name: '', price: 0 };
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void
+  {
     this.loadMenuItems();
   }
 
-  loadMenuItems(): void {
-    this.http.get('/api/menu').subscribe((data: any) => {
+  loadMenuItems(): void
+  {
+    this.http.get('/api/menu').subscribe((data: any) =>
+    {
       this.menuItems = data;
     });
   }
 
-  addItem(): void {
-    this.http.post('/api/menu', this.newItem).subscribe(() => {
+  addItem(): void
+  {
+    this.http.post('/api/menu', this.newItem).subscribe(() =>
+    {
       this.menuItems.push({ ...this.newItem });
       this.newItem = { name: '', price: 0 };
     });
   }
 
-  editItem(index: number): void {
+  editItem(index: number): void
+  {
     const updatedItem = prompt(
       'Edit item name and price (format: name,price):',
-      `${this.menuItems[index].name},${this.menuItems[index].price}`
+      `${ this.menuItems[index].name },${ this.menuItems[index].price }`
     );
 
-    if (updatedItem) {
+    if (updatedItem)
+    {
       const [name, price] = updatedItem.split(',');
       this.menuItems[index].name = name;
       this.menuItems[index].price = +price;
 
-      this.http.put(`/api/menu/${index}`, this.menuItems[index]).subscribe();
+      this.http.put(`/api/menu/${ index }`, this.menuItems[index]).subscribe();
     }
   }
 
-  removeItem(index: number): void {
-    this.http.delete(`/api/menu/${index}`).subscribe(() => {
+  removeItem(index: number): void
+  {
+    this.http.delete(`/api/menu/${ index }`).subscribe(() =>
+    {
       this.menuItems.splice(index, 1);
     });
   }

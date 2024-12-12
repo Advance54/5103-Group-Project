@@ -51,27 +51,32 @@ export class AppComponent implements OnInit
     return true;
   }
 
+  ItemFunction(): void
+  {
+
+    this.router.navigate(['/items']);
+  }
+  EmployeeFunction(): void
+  {
+
+    this.router.navigate(['/employees']);
+  }
+  ProfileFunction(): void
+  {
+    console.log("testing")
+    this.router.navigate(['/profile']);
+  }
+  // setTitle(header: string) {
+  // this.title = header ? header : 'Home';
+
+
   //trying to currently research how to fix this AGAIN, no idea why it's throwing errors but working
   //I cannot solve this, it works so I'll leave it
-LogoutFunction(): void{
-  sessionStorage.setItem("login", "")
-  this.router.navigate(['/']);
-}
-ItemFunction(): void{
-
-  this.router.navigate(['/items']);
-}
-EmployeeFunction(): void{
-
-  this.router.navigate(['/employees']);
-}
-ProfileFunction(): void{
-console.log("testing")
-  this.router.navigate(['/profile']);
-}
-setTitle(header: string) {
-this.title = header ? header : 'Home';
-
+  // LogoutFunction(): void
+  // {
+  //   sessionStorage.setItem("login", "")
+  //   this.router.navigate(['/']);
+  // }
 
   LogoutFunction(): void
   {

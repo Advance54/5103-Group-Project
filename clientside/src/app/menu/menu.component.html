@@ -3,8 +3,8 @@
 
   <!-- Form para adicionar novo item -->
   <form (submit)="addItem()">
-    <input type="text" placeholder="Item Name" [(ngModel)]="newItem.name" name="name" required />
-    <input type="number" placeholder="Price" [(ngModel)]="newItem.price" name="price" required />
+    <input type="text" placeholder="Item Name" (ngModel)="newItem.name" name="name" required />
+    <input type="number" placeholder="Price" (ngModel)="newItem.price" name="price" required />
     <button type="submit">Add Item</button>
   </form>
 
@@ -20,7 +20,8 @@
     <tbody>
       <tr *ngFor="let item of menuItems; let i = index">
         <td>{{ item.name }}</td>
-        <td>{{ item.price | currency }}</td>
+        <!-- <td>{{ item.price | currency }}</td> -->
+        <td>{{ item.price }}</td>
         <td>
           <button (click)="editItem(i)">Edit</button>
           <button class="remove-button" (click)="removeItem(i)">Remove</button>

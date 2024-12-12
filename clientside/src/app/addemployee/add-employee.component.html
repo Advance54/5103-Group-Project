@@ -3,11 +3,11 @@
 
   <!-- Formulário para adicionar funcionário -->
   <form (submit)="addEmployee()">
-    <input type="text" placeholder="Title" [(ngModel)]="newEmployee.title" name="title" required />
-    <input type="text" placeholder="Name" [(ngModel)]="newEmployee.firstlast" name="firstlast" required />
-    <input type="text" placeholder="Company" [(ngModel)]="newEmployee.company" name="company" required />
-    <input type="password" placeholder="Password" [(ngModel)]="newEmployee.password" name="password" required />
-    <input type="email" placeholder="Email" [(ngModel)]="newEmployee.email" name="email" required />
+    <input type="text" placeholder="Title" (ngModel)="newEmployee.title" name="title" required />
+    <input type="text" placeholder="Name" (ngModel)="newEmployee.firstlast" name="firstlast" required />
+    <input type="text" placeholder="Company" (ngModel)="newEmployee.company" name="company" required />
+    <input type="password" placeholder="Password" (ngModel)="newEmployee.password" name="password" required />
+    <input type="email" placeholder="Email" (ngModel)="newEmployee.email" name="email" required />
     <button type="submit">Add Employee</button>
   </form>
 

@@ -18,7 +18,7 @@ public class Item {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer Id;
     private String item_name;
-    private BigDecimal amount;
+    private Integer amount;
     private String Description;
     private BigDecimal item_order_cost;
     private BigDecimal item_cost;

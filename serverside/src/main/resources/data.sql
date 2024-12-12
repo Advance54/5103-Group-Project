@@ -20,7 +20,7 @@ VALUES ('White bread', 54 ,'One loaf',1.5 ,2.99);
 INSERT INTO Employee (Title,firstlast,Company,Password,Email)
  VALUES ('Manager','Michael Tracy','Fanshawe','','m');
  INSERT INTO Employee (Title,firstlast,Company,Password,Email)
- VALUES ('Manager','Alexander Mundt','Fanshawe2','','m');
+ VALUES ('Manager','Alexander Mundt','Fanshawe2','pass','a@m.com');
  INSERT INTO Employee (Title,firstlast,Company,Password,Email)
  VALUES ('Employee','Michael Tracy2','Fanshawe','','mt');
  INSERT INTO Employee (Title,firstlast,Company,Password,Email)

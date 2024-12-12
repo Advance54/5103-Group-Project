@@ -22,7 +22,7 @@ public class Order {
     @JsonFormat(pattern = "yyyy-MM-dd@HH:mm:ss")
     private LocalDateTime dateTime;
 
-    @OneToMany(targetEntity = OrderItem.class, fetch = FetchType.EAGER, orphanRemoval = true)
+    @OneToMany(targetEntity = OrderItem.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "orderid", referencedColumnName = "id")
     private List<OrderItem> items = new ArrayList<OrderItem>();
 

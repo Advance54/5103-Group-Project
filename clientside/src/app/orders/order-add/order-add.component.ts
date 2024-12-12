@@ -21,15 +21,8 @@ export class OrderAddComponent implements OnInit, OnDestroy
 
   @Output() cancelled = new EventEmitter();
   @Output() saved = new EventEmitter();
-  // // To prevent memory leaks
+
   formSubscription?: Subscription;
-  // msg: string = '';
-  // vendors: Vendor[] = [];
-  // selectedVendor: Vendor = VENDOR_DEFAULT;
-  // vendorProducts: Product[] = [];
-  // selectedProduct: Product = PRODUCT_DEFAULT;
-  // purchaseOrderItems: PurchaseOrderItem[] = [];
-  // generatedPurchaseOrderId: number = 0;\
   orderItemsInOrder: OrderItem[] = []
   selectedItem: Item = {
     id: 0,
@@ -45,13 +38,7 @@ export class OrderAddComponent implements OnInit, OnDestroy
   quantityForm: FormControl;
   orderFormGroup: FormGroup;
 
-  constructor
-    (
-      private builder: FormBuilder,
-      // private vendorService: VendorService,
-      // private productService: ProductService,
-      // private purchaseOrderService: PurchaseOrderService
-    )
+  constructor(private builder: FormBuilder)
   {
     this.tableForm = new FormControl('', Validators.compose([Validators.required]));
     this.itemForm = new FormControl('');
@@ -66,11 +53,9 @@ export class OrderAddComponent implements OnInit, OnDestroy
 
   ngOnInit(): void
   {
-    // this.msg = 'Loading vendors from server...';
     this.setupOnTableEnteredEvent();
     this.setupOnItemPickedEvent();
     this.setupOnQuantityPickedEvent();
-    // this.getAllVendors();
   }
 
   ngOnDestroy(): void
@@ -90,18 +75,10 @@ export class OrderAddComponent implements OnInit, OnDestroy
         return;
       }
 
-      //Reset all fields and values that are specific to each choice of vendor
+      //Reset all fields and values that are specific to each choice of table
       this.itemForm.reset();
       this.quantityForm.reset();
-      //this.selectedProduct = Object.assign({}, PRODUCT_DEFAULT);
-      //this.vendorProducts = [];
-      //this.purchaseOrderItems = [];
-      //this.generatedPurchaseOrderId = 0;
-
-      //this.selectedVendor = vendor;
-      //this.loadVendorProducts();
       this.orderItemsInOrder = [];
-      //this.msg = 'Choose product order for vendor';
     });
   }
 
@@ -133,18 +110,6 @@ export class OrderAddComponent implements OnInit, OnDestroy
           item.qty = quantity;
         }
       }
-      // else
-      // {
-      //   let newPoItem: PurchaseOrderItem = {
-      //     id: 0,
-      //     poid: 0,
-      //     productid: this.selectedProduct.id,
-      //     qty: quantity,
-      //     price: this.selectedProduct.costprice,
-      //   }
-
-      //   this.purchaseOrderItems.push(newPoItem);
-      // }
       else
       {
         let newOrderItem: OrderItem = {
@@ -165,25 +130,6 @@ export class OrderAddComponent implements OnInit, OnDestroy
 
     this.formSubscription?.add(quantitySubscription);
   }
-
-  // getAllVendors(verbose: boolean = true): void
-  // {
-  //   this.vendorService.getAll().subscribe({
-  //     next: (vendors: Vendor[]) => this.vendors = vendors,
-  //     error: (err: Error) => this.msg = `Failed to load vendors - ${ err.message }`,
-  //     complete: () => verbose ? this.msg = `Vendors loaded!` : null,
-  //   });
-  // }
-
-  // loadVendorProducts(): void
-  // {
-  //   this.vendorProducts = [];
-
-  //   this.productService.getSome(this.selectedVendor.id, "products/vendor").subscribe({
-  //     next: (products: Product[]) => this.vendorProducts = products,
-  //     error: (err: Error) => this.msg = `Products fetch failed! - ${ err.message }`
-  //   });
-  // }
 
   getPurchaseOrderItem(itemid: number): OrderItem | undefined
   {
@@ -223,41 +169,14 @@ export class OrderAddComponent implements OnInit, OnDestroy
       items: this.orderItemsInOrder
     };
 
-    //this.resetGenerator();
     this.saved.emit(order);
-
-    // this.orderService.add(po).subscribe({
-    //   next: (purchaseOrder: PurchaseOrder) =>
-    //   {
-    //     if (purchaseOrder.id > 0)
-    //     {
-    //       this.msg = `Purchase order ${ purchaseOrder.id } added!`;
-    //     }
-    //     else
-    //     {
-    //       this.msg = 'Purchase order not added! - server error';
-    //     }
-
-    //     this.generatedPurchaseOrderId = purchaseOrder.id;
-    //   },
-    //   error: (err: Error) => (this.msg = `Purchase order not added! - ${ err.message }`),
-    //   complete: () => this.resetGenerator(),
-    // });
   }
 
-  resetGenerator(): void
-  {
-    this.quantityForm.reset();
-    this.itemForm.reset();
-    this.tableForm.reset();
-    //this.selectedItem = Object.assign({}, VENDOR_DEFAULT);
-    //this.selectedProduct = Object.assign({}, PRODUCT_DEFAULT);
-    //this.vendorProducts = [];
-    this.orderItemsInOrder = [];
-  }
-
-  // viewPdf(): void
+  // resetGenerator(): void
   // {
-  //   window.open(`${ PDF_URL }?poid=${ this.generatedPurchaseOrderId }`);
+  //   this.quantityForm.reset();
+  //   this.itemForm.reset();
+  //   this.tableForm.reset();
+  //   this.orderItemsInOrder = [];
   // }
 }

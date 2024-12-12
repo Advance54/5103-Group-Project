@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { OrderService } from './order.service';
@@ -9,6 +9,7 @@ import { Item } from '../item/item';
 import { MatComponentsModule } from '../mat-components/mat-components.module';
 
 import { OrderAddComponent } from './order-add/order-add.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-orders',
@@ -19,6 +20,8 @@ import { OrderAddComponent } from './order-add/order-add.component';
 })
 export class OrdersComponent implements OnInit
 {
+  private router = inject(Router);
+
   orders: Order[] = []
   items: Item[] = [];
   showAddComponent: boolean = false;
@@ -27,6 +30,12 @@ export class OrdersComponent implements OnInit
 
   ngOnInit(): void
   {
+    if (!sessionStorage.getItem("login"))
+    {
+      this.router.navigate(['/']);
+
+    }
+
     this.loadOrders();
     this.loadItems();
   }

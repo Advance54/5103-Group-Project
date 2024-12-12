@@ -26,18 +26,6 @@
         </mat-form-field>
       </div>
 
-      <!-- <ng-template #noProducts>
-        <div *ngIf="selectedVendor.id !== 0" class="my-primary-text" align="center">
-          <div *ngIf="vendorProducts.length === 0; else allSelected">
-            No products for {{ selectedVendor.name }}
-          </div>
-
-          <ng-template #allSelected>
-            All products already selected
-          </ng-template>
-        </div>
-      </ng-template> -->
-
       <div *ngIf="selectedItem.id !== 0" layout="row">
         <mat-form-field flex style="width: 100%">
           <mat-label>Quantity</mat-label>

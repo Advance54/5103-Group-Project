@@ -1,39 +1,56 @@
 import { Component, OnInit } from '@angular/core';
-import { Location } from '@angular/common'
+import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { inject } from '@angular/core';
+
 @Component({
-selector: 'app-exercises',
-templateUrl: './app.component.html',
-styleUrl: './app.component.scss'
+  selector: 'app-exercises',
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss'
 })
-//[disabled]="!employeeForm.valid"
-export class AppComponent implements OnInit {
-title: string = '';
-private router = inject(Router);
-show: boolean = false;
-constructor(private location: Location) {
-let path = location.path();
-if (path && path.length > 1) {
-let header = path.substring(1, 2).toUpperCase();
-header += path.substring(2);
-this.setTitle(header);
-}
-else if (path === '') {
-this.setTitle('');
-}
-}
-  ngOnInit(): void {
-    if(sessionStorage.getItem("login")){
-      console.log( this.show)
-      this.show = true
+export class AppComponent implements OnInit
+{
+  title: string = '';
+  private router = inject(Router);
+  show: boolean = false;
+
+  constructor(private location: Location)
+  {
+    const path = location.path();
+    if (path && path.length > 1)
+    {
+      let header = path.substring(1, 2).toUpperCase();
+      header += path.substring(2);
+      this.setTitle(header);
+    } else if (path === '')
+    {
+      this.setTitle('');
     }
-    else{
-      this.show = false
-      console.log( this.show)
+  }
+
+  ngOnInit(): void
+  {
+    if (typeof window !== 'undefined' && sessionStorage.getItem("login"))
+    {
+      console.log(this.show);
+      this.show = true;
+    } else
+    {
+      this.show = false;
+      console.log(this.show);
+    }
+  }
+
+  isLoggedIn(): boolean
+  {
+    if (sessionStorage.getItem("login") == "")
+    {
+      return false;
     }
 
+    return true;
   }
+
   //trying to currently research how to fix this AGAIN, no idea why it's throwing errors but working
   //I cannot solve this, it works so I'll leave it
 LogoutFunction(): void{
@@ -55,6 +72,24 @@ console.log("testing")
 setTitle(header: string) {
 this.title = header ? header : 'Home';
 
-}
 
+  LogoutFunction(): void
+  {
+    if (typeof window !== 'undefined')
+    {
+      sessionStorage.setItem("login", "");
+      this.router.navigate(['/']);
+    }
+  }
+
+  setTitle(header: string)
+  {
+    this.title = header ? header : 'Home';
+  }
+
+  // Navegar entre rotas
+  navigateTo(route: string): void
+  {
+    this.router.navigate([`/${ route }`]);
+  }
 }

@@ -8,6 +8,7 @@
 --     private BigDecimal item_cost;
 
 
+
 INSERT INTO Item(item_name, amount, Description, item_order_cost, item_cost)
 VALUES ('Chicken Breat', 15 ,'Four chicken breasts',7.5 ,14.99);
 INSERT INTO Item(item_name, amount, Description, item_order_cost, item_cost)
@@ -22,3 +23,4 @@ INSERT INTO Employee (Title,firstlast,Company,Password,Email)
  VALUES ('Employee','Michael Tracy2','Fanshawe','','mt');
  INSERT INTO Employee (Title,firstlast,Company,Password,Email)
  VALUES ('Employee','Michael Tracy3','Fanshawe','password3','mt3@abc.com');
+

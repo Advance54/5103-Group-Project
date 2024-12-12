@@ -1,25 +1,28 @@
-import { Component, numberAttribute } from '@angular/core';
-import {  Input, Output, EventEmitter, OnInit } from '@angular/core';
-import { EmployeeService } from '../employee/employee.service';
-import { FormControl, FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { Employee } from '../employee/employee';
 import { Router } from '@angular/router';
 import { inject } from '@angular/core';
+
 import { MatTableDataSource } from '@angular/material/table';
+
+import { EmployeeService } from '../employee/employee.service';
+
 
 @Component({
   selector: 'my-router',
   templateUrl: './logoutpage.component.html',
   styles: ``
-
 })
+
 export class LogoutpageComponent implements OnInit{
   Form: FormGroup;
   title: FormControl;
   firstlast: FormControl;
 
   dataSource: MatTableDataSource<Employee> = new MatTableDataSource<Employee>();
+
   email: FormControl;
   password: FormControl;
   employees: Array<Employee>;
@@ -32,9 +35,11 @@ export class LogoutpageComponent implements OnInit{
   msg: string;
   employees$?: Observable<Employee[]>;
   employee?: Employee;
+
   constructor(private builder: FormBuilder, public employeeService: EmployeeService) {
     this.employees = [];
     this.createEmployee = false;
+
     this.employee = {
       id: 0,
       title: '',
@@ -42,6 +47,7 @@ export class LogoutpageComponent implements OnInit{
       company: '',
       password: '',
       email: '',
+
       };
       this.employee_new = {
         id: 0,
@@ -71,6 +77,15 @@ export class LogoutpageComponent implements OnInit{
     title: this.password,
     firstlast: this.email,
   });
+
+
+    this.email = new FormControl('', Validators.compose([Validators.required]));
+    this.password = new FormControl('', Validators.compose([Validators.required]));
+    this.loginForm = new FormGroup({
+      password: this.password,
+      email: this.email,
+    });
+  }
 
 
 
@@ -104,11 +119,18 @@ export class LogoutpageComponent implements OnInit{
       }); // subscribe
 
 
+
   }
-  LogoutFunction(): void{
-    sessionStorage.setItem("login", "")
+
+  LogoutFunction(): void
+  {
+    if (typeof window !== 'undefined')
+    {
+      sessionStorage.setItem("login", "");
+    }
     this.router.navigate(['/']);
   }
+
   startNewEmployee(): void {
     this.employee_new = Object.assign({}, this.employee_d);
     this.msg = 'New Employee';
@@ -173,5 +195,6 @@ export class LogoutpageComponent implements OnInit{
 
     });
     }
+
 
 }

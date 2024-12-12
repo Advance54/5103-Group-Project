@@ -7,9 +7,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { CreateHomeComponent } from './create-home/create-home.component';
+import { EmployeeSelfEditComponent } from './employee-self-edit/employee-self-edit.component';
 
 @NgModule({
- declarations: [EmployeeListComponent, LoginHomeComponent, CreateHomeComponent],
+ declarations: [EmployeeListComponent, LoginHomeComponent, CreateHomeComponent, EmployeeSelfEditComponent],
  imports: [CommonModule, MatComponentsModule, ReactiveFormsModule, FormsModule, RouterModule],
 })
 export class EmployeeModule {}

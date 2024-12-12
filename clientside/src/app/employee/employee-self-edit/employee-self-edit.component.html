@@ -1,0 +1,45 @@
+<mat-card>
+  <form [formGroup]="Form" (ngSubmit)="updateProfile()">
+
+    <div layout="row">
+    <mat-form-field>
+    <mat-label>title</mat-label>
+    <mat-error *ngIf="title.errors && (title.dirty || title.touched)">
+      Title is required
+      </mat-error>
+    <input matInput type="text" required formControlName="title" autofocus  />
+    </mat-form-field>
+    </div>
+    <div layout="row">
+    <mat-form-field>
+    <mat-label>first and last</mat-label>
+    <mat-error *ngIf="firstlast.errors && (firstlast.dirty || firstlast.touched)">
+      first and last is required
+      </mat-error>
+    <input matInput type="text" required formControlName="firstlast" />
+    </mat-form-field>
+    </div>
+    <div layout="row">
+    <mat-form-field>
+    <mat-label>password</mat-label>
+    <mat-error *ngIf="password.errors && (password.dirty || password.touched)">
+      password is required
+      </mat-error>
+    <input matInput type="text" required formControlName="password" />
+    </mat-form-field>
+    </div>
+    <div layout="row">
+      <mat-form-field>
+      <mat-label>email</mat-label>
+      <mat-error *ngIf="email.errors && (email.dirty || email.touched)">
+        email is required
+        </mat-error>
+      <input matInput type="text" required formControlName="email" />
+      </mat-form-field>
+      </div>
+      </form>
+      <span class="mat-headline">{{ msg }}</span>
+      <button mat-raised-button type="button" (click)="updateProfile()" [disabled]="!Form.valid" >
+        Save
+        </button>
+</mat-card>

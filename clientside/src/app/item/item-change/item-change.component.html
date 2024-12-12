@@ -1,0 +1,66 @@
+<form [formGroup]="Form" (ngSubmit)="updateSelectedItem()">
+  <div layout="row">
+  <mat-form-field>
+  <mat-label>name</mat-label>
+  <mat-error *ngIf="item_name.errors && (item_name.dirty || item_name.touched)">
+    Name is required
+    </mat-error>
+  <input matInput type="text" required formControlName="item_name" autofocus  />
+  </mat-form-field>
+  </div>
+  <div layout="row">
+  <mat-form-field>
+  <mat-label>amount</mat-label>
+  <mat-error *ngIf="amount.errors && (amount.dirty || amount.touched)">
+    amount is required
+    </mat-error>
+  <input matInput type="text" required formControlName="amount" />
+  </mat-form-field>
+  </div>
+  <div layout="row">
+  <mat-form-field>
+  <mat-label>description</mat-label>
+  <mat-error *ngIf="description.errors && (description.dirty || description.touched)">
+    description is required
+    </mat-error>
+  <input matInput type="text" required formControlName="description" />
+  </mat-form-field>
+  </div>
+  <div layout="row">
+    <mat-form-field>
+    <mat-label>item order cost</mat-label>
+    <mat-error *ngIf="item_order_cost.errors && (item_order_cost.dirty || item_order_cost.touched)">
+      item order cost is required
+      </mat-error>
+    <input matInput type="text" required formControlName="item_order_cost" />
+    </mat-form-field>
+    </div>
+    <div layout="row">
+      <mat-form-field>
+      <mat-label>item cost</mat-label>
+      <mat-error *ngIf="item_cost.errors && (item_cost.dirty || item_cost.touched)">
+        item cost is required
+        </mat-error>
+      <input matInput type="text" required formControlName="item_cost" />
+      </mat-form-field>
+      </div>
+
+
+
+
+  <div class="mat-pad-sm">
+  <button mat-raised-button type="button" (click)="updateSelectedItem()" [disabled]="!Form.valid">
+    Save
+    </button>
+  <span>
+    <button *ngIf="employee.title=='Manager'" mat-raised-button type="button"
+    (click)="deleted.emit(selectedItem)">Delete</button>
+    </span>
+  <span>
+    <!--
+  <button mat-raised-button type="button" (click)="cancelled.emit(selectedVendor)">
+  Cancel
+  </button> -->
+  </span>
+  </div>
+ </form>

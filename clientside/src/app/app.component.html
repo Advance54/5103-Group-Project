@@ -2,16 +2,14 @@
   <span>INFO5103 - project</span>
   <span style="flex: 1 1 auto;"></span>
 
-  <mat-menu #menu="matMenu">
-    <button mat-menu-item (click)="navigateTo('orders')">Orders</button>
-    <button mat-menu-item (click)="navigateTo('menu')">Menu</button>
-    <button mat-menu-item (click)="navigateTo('add-employee')">Add Employee</button>
-  </mat-menu>
+  <button mat-button  align="center" (click)="ProfileFunction() " >Profile</button>
+  <button mat-button  align="center" (click)="LogoutFunction() " >Logout</button>
+  <button mat-button  align="center" (click)="ItemFunction() " >Items</button>
+  <button mat-button  align="center" (click)="EmployeeFunction() " >Employee</button>
 
-  <!-- Botão para abrir o menu -->
-  <button *ngIf="isLoggedIn()" mat-icon-button [matMenuTriggerFor]=" menu">
-    <mat-icon>menu</mat-icon>
-  </button>
-</mat-toolbar>
+
+
+ </mat-toolbar>
+
 
 <router-outlet></router-outlet>

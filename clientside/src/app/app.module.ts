@@ -33,14 +33,19 @@ import { EmployeeModule } from './employee/employee.module';
 // HTTP Client
 import { provideHttpClient, withFetch } from '@angular/common/http';
 
+import { ItemStockComponent } from './item/item-stock/item-stock.component';
+import { ItemChangeComponent } from './item/item-change/item-change.component';
+//mat-label
+
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     LogoutpageComponent,
-    MenuComponent,
-    OrdersComponent,
-    AddEmployeeComponent
+
+    ItemStockComponent,
+    ItemChangeComponent,
+
   ],
   imports: [
     BrowserModule,

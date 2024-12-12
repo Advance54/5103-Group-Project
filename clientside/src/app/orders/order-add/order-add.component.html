@@ -19,7 +19,8 @@
 
           <mat-select placeholder="Choose Item" formControlName="itemForm">
             <mat-option style="width: 100%" *ngFor="let item of items" [value]="item">
-              {{ item.item_name }} - {{ item.description }} - {{ item.item_cost }}
+              {{ item.item_name }} - {{ item.description }} - {{ item.item_cost | currency : "CAD" : "symbol" : "1.2-2"
+              }}
             </mat-option>
           </mat-select>
         </mat-form-field>
@@ -99,7 +100,7 @@
               Subtotal:
             </td>
 
-            <td class="my-accent-text" style="font-weight: 600; text-align: right">
+            <td style="font-weight: 600; text-align: right">
               {{ subtotal() | currency : "CAD" : "symbol" : "1.2-2" }}
             </td>
           </tr>
@@ -109,7 +110,7 @@
               Tax:
             </td>
 
-            <td class="my-accent-text" style="font-weight: 600; text-align: right">
+            <td style="font-weight: 600; text-align: right">
               {{ tax() | currency : "CAD" : "symbol" : "1.2-2" }}
             </td>
           </tr>
@@ -119,7 +120,7 @@
               Total:
             </td>
 
-            <td class="my-accent-text" style="font-weight: 600; text-align: right">
+            <td style="font-weight: 600; text-align: right">
               {{ total() | currency : "CAD" : "symbol" : "1.2-2" }}
             </td>
           </tr>
@@ -128,10 +129,18 @@
     </form>
   </mat-card-content>
 
-  <div class="mat-pad-sm">
+  <div style="text-align: center">
     <span>
       <button mat-raised-button type="button" (click)="cancelled.emit()">
         Cancel
+      </button>
+    </span>
+  </div>
+
+  <div style="text-align: center" *ngIf="orderItemsInOrder.length > 0">
+    <span>
+      <button mat-raised-button type="button" (click)="createReport()">
+        Add Order
       </button>
     </span>
   </div>

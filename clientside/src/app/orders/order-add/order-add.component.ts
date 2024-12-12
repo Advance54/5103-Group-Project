@@ -6,6 +6,7 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } 
 import { MatComponentsModule } from '../../mat-components/mat-components.module';
 import { Item } from '../../item/item';
 import { OrderItem } from '../order-item.model';
+import { Order } from '../order.model';
 
 @Component({
   selector: 'app-order-add',
@@ -123,15 +124,15 @@ export class OrderAddComponent implements OnInit, OnDestroy
   {
     const quantitySubscription = this.orderFormGroup.get('quantityForm')?.valueChanges.subscribe(quantity =>
     {
-      // if (this.isProductAlreadySelected(this.selectedProduct.id))
-      // {
-      //   let item = this.getPurchaseOrderItem(this.selectedProduct.id);
+      if (this.isProductAlreadySelected(this.selectedItem.id))
+      {
+        let item = this.getPurchaseOrderItem(this.selectedItem.id);
 
-      //   if (item)
-      //   {
-      //     item.qty = quantity;
-      //   }
-      // }
+        if (item)
+        {
+          item.qty = quantity;
+        }
+      }
       // else
       // {
       //   let newPoItem: PurchaseOrderItem = {
@@ -144,17 +145,20 @@ export class OrderAddComponent implements OnInit, OnDestroy
 
       //   this.purchaseOrderItems.push(newPoItem);
       // }
-      let newOrderItem: OrderItem = {
-        id: 0,
-        orderid: 0,
-        itemid: this.selectedItem.id,
-        qty: quantity,
-        name: this.selectedItem.item_name,
-        description: this.selectedItem.description,
-        item_cost: this.selectedItem.item_cost,
-      }
+      else
+      {
+        let newOrderItem: OrderItem = {
+          id: 0,
+          orderid: 0,
+          itemid: this.selectedItem.id,
+          qty: quantity,
+          name: this.selectedItem.item_name,
+          description: this.selectedItem.description,
+          item_cost: this.selectedItem.item_cost,
+        }
 
-      this.orderItemsInOrder.push(newOrderItem);
+        this.orderItemsInOrder.push(newOrderItem);
+      }
 
       this.orderItemsInOrder = this.orderItemsInOrder.filter(item => item.qty > 0);
     });
@@ -181,15 +185,15 @@ export class OrderAddComponent implements OnInit, OnDestroy
   //   });
   // }
 
-  // getPurchaseOrderItem(productid: string): PurchaseOrderItem | undefined
-  // {
-  //   return this.purchaseOrderItems.find(poi => poi.productid === productid);
-  // }
+  getPurchaseOrderItem(itemid: number): OrderItem | undefined
+  {
+    return this.orderItemsInOrder.find(oiio => oiio.itemid === itemid);
+  }
 
-  // isProductAlreadySelected(productid: string): boolean
-  // {
-  //   return this.purchaseOrderItems.find(poi => poi.productid === productid) !== undefined;
-  // }
+  isProductAlreadySelected(itemid: number): boolean
+  {
+    return this.orderItemsInOrder.find(oiio => oiio.itemid === itemid) !== undefined;
+  }
 
   subtotal(): number
   {
@@ -209,45 +213,48 @@ export class OrderAddComponent implements OnInit, OnDestroy
     return this.subtotal() + this.tax();
   }
 
-  // createReport(): void
-  // {
-  //   const po: PurchaseOrder = {
-  //     id: 0,
-  //     vendorid: this.selectedVendor.id,
-  //     amount: this.total(), //THIS will be ignored by the server
-  //     podate: '', //SAME here
-  //     items: this.purchaseOrderItems,
-  //   };
+  createReport(): void
+  {
+    const order: Order = {
+      id: 0,
+      tableNumber: this.tableForm.value,
+      totalPrice: this.total(),
+      dateTime: "",
+      items: this.orderItemsInOrder
+    };
 
-  //   this.purchaseOrderService.add(po).subscribe({
-  //     next: (purchaseOrder: PurchaseOrder) =>
-  //     {
-  //       if (purchaseOrder.id > 0)
-  //       {
-  //         this.msg = `Purchase order ${ purchaseOrder.id } added!`;
-  //       }
-  //       else
-  //       {
-  //         this.msg = 'Purchase order not added! - server error';
-  //       }
+    //this.resetGenerator();
+    this.saved.emit(order);
 
-  //       this.generatedPurchaseOrderId = purchaseOrder.id;
-  //     },
-  //     error: (err: Error) => (this.msg = `Purchase order not added! - ${ err.message }`),
-  //     complete: () => this.resetGenerator(),
-  //   });
-  // }
+    // this.orderService.add(po).subscribe({
+    //   next: (purchaseOrder: PurchaseOrder) =>
+    //   {
+    //     if (purchaseOrder.id > 0)
+    //     {
+    //       this.msg = `Purchase order ${ purchaseOrder.id } added!`;
+    //     }
+    //     else
+    //     {
+    //       this.msg = 'Purchase order not added! - server error';
+    //     }
 
-  // resetGenerator(): void
-  // {
-  //   this.quantityForm.reset();
-  //   this.productForm.reset();
-  //   this.vendorForm.reset();
-  //   this.selectedVendor = Object.assign({}, VENDOR_DEFAULT);
-  //   this.selectedProduct = Object.assign({}, PRODUCT_DEFAULT);
-  //   this.vendorProducts = [];
-  //   this.purchaseOrderItems = [];
-  // }
+    //     this.generatedPurchaseOrderId = purchaseOrder.id;
+    //   },
+    //   error: (err: Error) => (this.msg = `Purchase order not added! - ${ err.message }`),
+    //   complete: () => this.resetGenerator(),
+    // });
+  }
+
+  resetGenerator(): void
+  {
+    this.quantityForm.reset();
+    this.itemForm.reset();
+    this.tableForm.reset();
+    //this.selectedItem = Object.assign({}, VENDOR_DEFAULT);
+    //this.selectedProduct = Object.assign({}, PRODUCT_DEFAULT);
+    //this.vendorProducts = [];
+    this.orderItemsInOrder = [];
+  }
 
   // viewPdf(): void
   // {

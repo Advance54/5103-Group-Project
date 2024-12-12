@@ -22,7 +22,7 @@
             <td>
               <ul>
                 <li *ngFor="let oitem of order.items">
-                  <!-- {{ oitem.name }} (x{{ oitem.quantity }}) - {{ oitem.unitPrice | currency: 'CAD' }} -->
+                  {{ oitem.name }} (x{{ oitem.qty }}) - {{ oitem.item_cost | currency: 'CAD' }}
                 </li>
               </ul>
             </td>
@@ -33,7 +33,7 @@
       </table>
     </div>
 
-    <div class="mat-pad-sm">
+    <div style="text-align: center">
       <span>
         <button mat-raised-button type="button" (click)="startNewOrder()">
           Add Order

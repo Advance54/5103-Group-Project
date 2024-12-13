@@ -97,7 +97,7 @@ hideEditForm: boolean;
     //this.msg = `${} `
     if(sessionStorage.getItem("login")){
       // console.log(sessionStorage.getItem("login"))
-      this.employee = JSON.parse(sessionStorage.getItem("login")|| '{}')[0]
+      this.employee = JSON.parse(sessionStorage.getItem("login")|| '{}')
       console.log(this.employee)
       this.msg = `Welcome to ${this.employee?.company}'s Stock page!`
       //console.log(this.msg)

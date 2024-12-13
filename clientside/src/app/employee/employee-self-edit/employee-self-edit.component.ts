@@ -64,7 +64,7 @@ export class EmployeeSelfEditComponent implements OnInit{
     //this.msg = `${} `
     if(sessionStorage.getItem("login")){
 
-      this.tempemployee = JSON.parse(sessionStorage.getItem("login")|| '{}')[0]
+      this.tempemployee = JSON.parse(sessionStorage.getItem("login")|| '{}')
 
       this.employeeService.getAll().subscribe({
         next: (payload: any) => {

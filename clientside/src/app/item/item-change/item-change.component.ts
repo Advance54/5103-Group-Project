@@ -53,7 +53,7 @@ export class ItemChangeComponent {
     ngOnInit(): void {
 
     //console.log(sessionStorage.getItem("login"))
-    this.employee = JSON.parse(sessionStorage.getItem("login")|| '{}')[0]
+    this.employee = JSON.parse(sessionStorage.getItem("login")|| '{}')
     //console.log(this.employee.title)
     this.Form.patchValue({
       item_name: this.selectedItem.item_name,
